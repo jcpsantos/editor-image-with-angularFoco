@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container-fluid">
     <div class="row">
         <div class="col-xl-12 main-title">
             <h4>Angular Editor Fabric-JS</h4>
@@ -68,25 +68,25 @@
             </div>
             <br/>
             <div class="card">
-                <div class="card-header">Adicionar imagens</div>
+                <div class="card-header">Adicionar Icones</div>
                 <div class="card-body max-height">
-                    <img class="images-item" (click)="getImgPolaroid($event)" src="assets/img/pikachu.svg">
-                    <img class="images-item" (click)="getImgPolaroid($event)" src="assets/img/squirtle.svg">
-                    <img class="images-item" (click)="getImgPolaroid($event)" src="assets/img/bullbasaur.svg">
-                    <img class="images-item" (click)="getImgPolaroid($event)" src="assets/img/charmander.svg">
-                    <img class="images-item" (click)="getImgPolaroid($event)" src="assets/img/bellsprout.svg">
-                    <img class="images-item" (click)="getImgPolaroid($event)" src="assets/img/caterpie.svg">
-                    <img class="images-item" (click)="getImgPolaroid($event)" src="assets/img/dratini.svg">
-                    <img class="images-item" (click)="getImgPolaroid($event)" src="assets/img/eevee.svg">
-                    <img class="images-item" (click)="getImgPolaroid($event)" src="assets/img/jigglypuff.svg">
-                    <img class="images-item" (click)="getImgPolaroid($event)" src="assets/img/mankey.svg">
-                    <img class="images-item" (click)="getImgPolaroid($event)" src="assets/img/meowth.svg">
-                    <img class="images-item" (click)="getImgPolaroid($event)" src="assets/img/pidgey.svg">
-                    <img class="images-item" (click)="getImgPolaroid($event)" src="assets/img/psyduck.svg">
-                    <img class="images-item" (click)="getImgPolaroid($event)" src="assets/img/rattata.svg">
-                    <img class="images-item" (click)="getImgPolaroid($event)" src="assets/img/abra.svg">
-                    <img class="images-item" (click)="getImgPolaroid($event)" src="assets/img/snorlax.svg">
-                    <img class="images-item" (click)="getImgPolaroid($event)" src="assets/img/zubat.svg">
+                    <img class="images-item" (click)="getImgPolaroid($event)" src="assets/img/Facebook_icon-icons.com_66805.svg">
+                    <img class="images-item" (click)="getImgPolaroid($event)" src="assets/img/Instagram_icon-icons.com_66804.svg">
+                    <img class="images-item" (click)="getImgPolaroid($event)" src="assets/img/Youtube_icon-icons.com_66802.svg">
+                    <img class="images-item" (click)="getImgPolaroid($event)" src="assets/img/Whatsapp_icon-icons.com_66931.svg">
+                    <img class="images-item" (click)="getImgPolaroid($event)" src="assets/img/Airbnb_icon-icons.com_66791.svg">
+                    <img class="images-item" (click)="getImgPolaroid($event)" src="assets/img/auricular-phone-symbol-in-a-circle_icon-icons.com_56570.svg">
+                    <img class="images-item" (click)="getImgPolaroid($event)" src="assets/img/email-envelope-outline-shape-with-rounded-corners_icon-icons.com_56530.svg">
+                    <img class="images-item" (click)="getImgPolaroid($event)" src="assets/img/window-domain_icon-icons.com_52810.svg">
+                    <img class="images-item" (click)="getImgPolaroid($event)" src="assets/img/1485969928-17-location_78896.svg">  
+                    <img class="images-item" (click)="getImgPolaroid($event)" src="assets/img/grey_beach-chair-and-umbrella_icon-icons.com_59443.svg">
+                    <img class="images-item" (click)="getImgPolaroid($event)" src="assets/img/icon6_101137.svg">
+                    <img class="images-item" (click)="getImgPolaroid($event)" src="assets/img/1494258045-sunsunnyweatherspringforecastsummer_84343.svg">
+                    <img class="images-item" (click)="getImgPolaroid($event)" src="assets/img/1495815261-jd08_84586.svg">
+                    <img class="images-item" (click)="getImgPolaroid($event)" src="assets/img/Mastercard_icon-icons.com_60554.svg">
+                    <img class="images-item" (click)="getImgPolaroid($event)" src="assets/img/dollar_money_pay_funds_icon-icons.com_76288.svg">
+                    <img class="images-item" (click)="getImgPolaroid($event)" src="assets/img/1495815230-jd11_84589.svg">
+                    <img class="images-item" (click)="getImgPolaroid($event)" src="assets/img/Paypal-39_icon-icons.com_60555.svg">   
                 </div>
             </div>
             <br/>
@@ -94,7 +94,7 @@
                 <div class="card-header">Upload imagens</div>
                 <div class="card-body text-center">
                     <img id="testImage" *ngIf="url" class="images-item-upload" [src]="url" (click)="addImageOnCanvas(url);">
-                    <input type="file" (change)="readUrl($event);">
+                    <input type="file" (change)="readUrl($event);" class="input_upl_image">
                     <br/>
                     <br/>
                     <div class="btn-group btn-group-justified" role="group" aria-label="...">
@@ -121,165 +121,179 @@
         <div class="col-xl-6">
             <canvas id="canvas"></canvas>
         </div>
-        <div class="col-xl-3">
-            <div class="card">
-                <div class="card-header">Opções</div>
-                <div class="card-body text-center">
-                    <div class="btn-group" role="group" aria-label="...">
-                        <button data-toggle="tooltip" data-placement="bottom" title="Delete element" type="button" class="btn btn-outline-danger" [disabled]="!selected"
-                            (click)="removeSelected();">
-                            <i class="fa fa-trash" aria-hidden="true"></i>
-                        </button>
-                        <button data-toggle="tooltip" data-placement="bottom" title="Send to back" type="button" class="btn btn-outline-primary" [disabled]="!selected"
-                            (click)="sendToBack();">
-                            <i class="fa fa-level-down" aria-hidden="true"></i>
-                        </button>
-                        <button data-toggle="tooltip" data-placement="bottom" title="Send to front" type="button" class="btn btn-outline-primary" [disabled]="!selected"
-                            (click)="bringToFront();">
-                            <i class="fa fa-level-up" aria-hidden="true"></i>
-                        </button>
-                        <button data-toggle="tooltip" data-placement="bottom" title="Clone" type="button" class="btn btn-outline-primary" [disabled]="!selected || selected.type == 'group'"
-                            (click)="clone();">
-                            <i class="fa fa-clone" aria-hidden="true"></i>
-                        </button>
-                        <button data-toggle="tooltip" data-placement="bottom" title="Unselect" type="button" class="btn btn-outline-primary" [disabled]="!selected"
-                            (click)="cleanSelect()">
-                            <i class="fa fa-remove" aria-hidden="true"></i>
-                        </button>
-                    </div>
-                </div>
-            </div>
-            <br/>
-            <div class="card" *ngIf="!selected">
-                <div class="card-header">Canvas</div>
-                <div class="card-body">
-                    <div class="custom-item" *ngIf="!props.canvasImage">
-                        <div class="custom-item-title">Cor de Fundo</div>
-                        <div class="custom-item-body">
-                            <input type="text" class="form-control" [cpPosition]="'bottom'" [(colorPicker)]="props.canvasFill" [style.background]="props.canvasFill"
-                                [value]="props.canvasFill" (colorPickerChange)="setCanvasFill()">
-                        </div>
-                    </div>
-                    <div class="custom-item">
-                        <div class="custom-item-title">Imagem de Fundo (url)</div>
-                        <div class="custom-item-body">
-                            <input type="text" class="form-control" placeholder="http://example.jpg" [(ngModel)]="props.canvasImage" (keyup)="setCanvasImage()">
+        <div class="col-xl-12 row" style="margin-top: 5vh">
+            <div class="col-xl-4">
+                <div class="card">
+                    <div class="card-header">Opções</div>
+                    <div class="card-body text-center">
+                        <div class="btn-group" role="group" aria-label="...">
+                            <button data-toggle="tooltip" data-placement="bottom" title="Deletar elemento" type="button" class="btn btn-outline-danger" [disabled]="!selected"
+                                (click)="removeSelected();">
+                                <i class="fa fa-trash" aria-hidden="true"></i>
+                            </button>
+                            <button data-toggle="tooltip" data-placement="bottom" title="Enviar para tras" type="button" class="btn btn-outline-primary" [disabled]="!selected"
+                                (click)="sendToBack();">
+                                <i class="fa fa-level-down" aria-hidden="true"></i>
+                            </button>
+                            <button data-toggle="tooltip" data-placement="bottom" title="Enviar para frente" type="button" class="btn btn-outline-primary" [disabled]="!selected"
+                                (click)="bringToFront();">
+                                <i class="fa fa-level-up" aria-hidden="true"></i>
+                            </button>
+                            <button data-toggle="tooltip" data-placement="bottom" title="Copiar" type="button" class="btn btn-outline-primary" [disabled]="!selected || selected.type == 'group'"
+                                (click)="clone();">
+                                <i class="fa fa-clone" aria-hidden="true"></i>
+                            </button>
+                            <button data-toggle="tooltip" data-placement="bottom" title="Desmarcar" type="button" class="btn btn-outline-primary" [disabled]="!selected"
+                                (click)="cleanSelect()">
+                                <i class="fa fa-remove" aria-hidden="true"></i>
+                            </button>
                         </div>
                     </div>
                 </div>
-            </div>
+            </div>    
             <br/>
-            <div class="card">
-                <div class="card-header">Customizar</div>
-                <div class="card-body">
-                    <div class="custom-item" *ngIf="selected  && selected.type == 'group'">Grupo Selecionado</div>
-                    <div class="custom-item" *ngIf="!selected">Não tem itens selecionado</div>
-                    <div class="custom-item" *ngIf="selected && selected.type != 'group'">
-                        <div class="custom-item-title">ID</div>
-                        <div class="custom-item-body">
-                            <input type="text" class="form-control" [(ngModel)]="props.id" (keyup)="setId()">
+            <div class="col-xl-4"> 
+                <div class="card" *ngIf="!selected">
+                    <div class="card-header">Canvas</div>
+                    <div class="card-body">
+                        <div class="custom-item" *ngIf="!props.canvasImage">
+                            <div class="custom-item-title">Cor de Fundo</div>
+                            <div class="custom-item-body">
+                                <input type="text" class="form-control" [cpPosition]="'bottom'" [(colorPicker)]="props.canvasFill" [style.background]="props.canvasFill"
+                                    [value]="props.canvasFill" (colorPickerChange)="setCanvasFill()">
+                            </div>
                         </div>
-                    </div>
-                    <div class="custom-item" *ngIf="selected && selected.type != 'group'">
-                        <div class="custom-item-title">Opacidade</div>
-                        <div class="custom-item-body">
-                            <input type="range" [(ngModel)]="props.opacity" (change)="setOpacity()">{{props.opacity}}</div>
-                    </div>
-                    <div class="custom-item" *ngIf="selected && textEditor || selected && figureEditor">
-                        <div class="custom-item-title">Preencher</div>
-                        <div class="custom-item-body">
-                            <input type="text" class="form-control" [cpPosition]="'bottom'" [(colorPicker)]="props.fill" [style.background]="props.fill"
-                                [value]="props.fill" (colorPickerChange)="setFill()">
-                        </div>
-                    </div>
-                    <div class="custom-item" *ngIf="selected && textEditor">
-                        <div class="custom-item-title">Fontes</div>
-                        <div class="custom-item-body">
-                            <select [(ngModel)]="props.fontFamily" class="form-control" (change)="setFontFamily()">
-                                <option value="arial">Arial</option>
-                                <option value="helvetica" selected>Helvetica</option>
-                                <option value="verdana">Verdana</option>
-                                <option value="courier">Courier</option>
-                                <option value="Roboto">Roboto</option>
-                                <option value="Open Sans">Open Sans</option>
-                                <option value="Zilla Slab">Zilla Slab</option>
-                                <option value="Lato">Lato</option>
-                                <option value="Bellefair">Bellefair</option>
-                                <option value="Fresca">Fresca</option>
-                                <option value="Raleway">Raleway</option>
-                                <option value="Open Sans Condensed">Open Sans Condensed</option>
-                                <option value="Indie Flower">Indie Flower</option>
-                                <option value="Josefin Sans">Josefin Sans</option>
-                                <option value="Inconsolata">Inconsolata</option>
-                                <option value="Pacifico">Pacifico</option>
-                                <option value="Gloria Hallelujah">Gloria Hallelujah</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="custom-item" *ngIf="selected && textEditor">
-                        <div class="custom-item-title">Alinhamento de Texto</div>
-                        <div class="custom-item-body text-center">
-                            <div class="btn-group" role="group" aria-label="...">
-                                <button type="button" class="btn btn-primary" [ngClass]="{'active': props.textAlign == 'left' }" (click)="setTextAlign('left')">
-                                    <i class="fa fa-align-left"></i>
-                                </button>
-                                <button type="button" class="btn btn-primary" [ngClass]="{'active': props.textAlign == 'center' }" (click)="setTextAlign('center')">
-                                    <i class="fa fa-align-center"></i>
-                                </button>
-                                <button type="button" class="btn btn-primary" [ngClass]="{'active': props.textAlign == 'right' }" (click)="setTextAlign('right')">
-                                    <i class="fa fa-align-right"></i>
-                                </button>
-                                <button type="button" class="btn btn-primary" [ngClass]="{'active': props.textAlign == 'justify' }" (click)="setTextAlign('justify')">
-                                    <i class="fa fa-align-justify"></i>
-                                </button>
+                        <div class="custom-item">
+                            <div class="custom-item-title">Imagem de Fundo (url)</div>
+                            <div class="custom-item-body">
+                                <input type="text" class="form-control" placeholder="http://example.jpg" [(ngModel)]="props.canvasImage" (keyup)="setCanvasImage()">
                             </div>
                         </div>
                     </div>
-                    <div class="custom-item" *ngIf="selected && textEditor">
-                        <div class="custom-item-title">Estilo</div>
-                        <div class="custom-item-body text-center">
-                            <div class="btn-group" role="group" aria-label="...">
-                                <button type="button" class="btn btn-primary btn-sm" [ngClass]="{'active': props.fontWeight }" (click)="setBold()">
-                                    <i class="fa fa-bold"></i>
-                                </button>
-                                <button type="button" class="btn btn-primary btn-sm" [ngClass]="{'active': props.fontStyle }" (click)="setFontStyle()">
-                                    <i class="fa fa-italic"></i>
-                                </button>
-                                <button type="button" class="btn btn-primary btn-sm" [ngClass]="{'active': hasTextDecoration('underline') }"
-                                    (click)="setTextDecoration('underline')">
-                                    <i class="fa fa-underline"></i>
-                                </button>
-                                <button type="button" class="btn btn-primary btn-sm" [ngClass]="{'active': hasTextDecoration('overline') }"
-                                    (click)="setTextDecoration('overline')">
-                                    <i class="fa fa-underline fa-flip-vertical"></i>
-                                </button>
-                                <button type="button" class="btn btn-primary btn-sm" [ngClass]="{'active': hasTextDecoration('line-through') }"
-                                    (click)="setTextDecoration('line-through')">
-                                    <i class="fa fa-strikethrough"></i>
-                                </button>
+                </div>
+            </div>    
+            <br/>
+            <div class="col-xl-4"> 
+                <div class="card">
+                    <div class="card-header">Customizar</div>
+                    <div class="card-body">
+                        <div class="custom-item" *ngIf="selected  && selected.type == 'group'">Grupo Selecionado</div>
+                        <div class="custom-item" *ngIf="!selected">Não tem itens selecionado</div>
+                        <div class="custom-item" *ngIf="selected && selected.type != 'group'">
+                            <div class="custom-item-title">ID</div>
+                            <div class="custom-item-body">
+                                <input type="text" class="form-control" [(ngModel)]="props.id" (keyup)="setId()">
                             </div>
                         </div>
-                    </div>
-                    <div class="custom-item" *ngIf="selected && textEditor">
-                        <div class="custom-item-title">Tamanho da Fonte</div>
-                        <div class="custom-item-body">
-                            <input type="range" [(ngModel)]="props.fontSize" (change)="setFontSize()" step="1" min="1" max="120">{{props.fontSize}}</div>
-                    </div>
-                    <div class="custom-item" *ngIf="selected && textEditor">
-                        <div class="custom-item-title">Altura da Linha</div>
-                        <div class="custom-item-body">
-                            <input type="range" [(ngModel)]="props.lineHeight" (change)="setLineHeight()" step="0.1" min="0" max="10">{{props.lineHeight}}</div>
-                    </div>
-                    <div class="custom-item" *ngIf="selected && textEditor">
-                        <div class="custom-item-title">Espaçamento entre Caracteres</div>
-                        <div class="custom-item-body">
-                            <input type="range" [(ngModel)]="props.charSpacing" (change)="setCharSpacing()" step="10" min="-200" max="800">{{props.charSpacing}}</div>
+                        <div class="custom-item" *ngIf="selected && selected.type != 'group'">
+                            <div class="custom-item-title">Opacidade</div>
+                            <div class="custom-item-body">
+                                <input type="range" [(ngModel)]="props.opacity" (change)="setOpacity()">{{props.opacity}}</div>
+                        </div>
+                        <div class="custom-item" *ngIf="selected && selected.type != 'group'">
+                            <div class="custom-item-title">Filtros</div>
+                            <div class="custom-item-body">
+                                <button type="button" class="btn btn-primary btn-sm" [ngClass]="{'active': hasFilter('grayscale') }"
+                                (click)="setFilter('grayscale')">
+                                    Escala de Cinza
+                                </button>
+                        </div>
+                        <div class="custom-item" *ngIf="selected && textEditor || selected && figureEditor">
+                            <div class="custom-item-title">Preencher</div>
+                            <div class="custom-item-body">
+                                <input type="text" class="form-control" [cpPosition]="'bottom'" [(colorPicker)]="props.fill" [style.background]="props.fill"
+                                    [value]="props.fill" (colorPickerChange)="setFill()">
+                            </div>
+                        </div>
+                        <div class="custom-item" *ngIf="selected && textEditor">
+                            <div class="custom-item-title">Fontes</div>
+                            <div class="custom-item-body">
+                                <select [(ngModel)]="props.fontFamily" class="form-control" (change)="setFontFamily()">
+                                    <option value="arial">Arial</option>
+                                    <option value="helvetica" selected>Helvetica</option>
+                                    <option value="verdana">Verdana</option>
+                                    <option value="courier">Courier</option>
+                                    <option value="Roboto">Roboto</option>
+                                    <option value="Open Sans">Open Sans</option>
+                                    <option value="Zilla Slab">Zilla Slab</option>
+                                    <option value="Lato">Lato</option>
+                                    <option value="Bellefair">Bellefair</option>
+                                    <option value="Fresca">Fresca</option>
+                                    <option value="Raleway">Raleway</option>
+                                    <option value="Open Sans Condensed">Open Sans Condensed</option>
+                                    <option value="Indie Flower">Indie Flower</option>
+                                    <option value="Josefin Sans">Josefin Sans</option>
+                                    <option value="Inconsolata">Inconsolata</option>
+                                    <option value="Pacifico">Pacifico</option>
+                                    <option value="Gloria Hallelujah">Gloria Hallelujah</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="custom-item" *ngIf="selected && textEditor">
+                            <div class="custom-item-title">Alinhamento de Texto</div>
+                            <div class="custom-item-body text-center">
+                                <div class="btn-group" role="group" aria-label="...">
+                                    <button type="button" class="btn btn-primary" [ngClass]="{'active': props.textAlign == 'left' }" (click)="setTextAlign('left')">
+                                        <i class="fa fa-align-left"></i>
+                                    </button>
+                                    <button type="button" class="btn btn-primary" [ngClass]="{'active': props.textAlign == 'center' }" (click)="setTextAlign('center')">
+                                        <i class="fa fa-align-center"></i>
+                                    </button>
+                                    <button type="button" class="btn btn-primary" [ngClass]="{'active': props.textAlign == 'right' }" (click)="setTextAlign('right')">
+                                        <i class="fa fa-align-right"></i>
+                                    </button>
+                                    <button type="button" class="btn btn-primary" [ngClass]="{'active': props.textAlign == 'justify' }" (click)="setTextAlign('justify')">
+                                        <i class="fa fa-align-justify"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="custom-item" *ngIf="selected && textEditor">
+                            <div class="custom-item-title">Estilo</div>
+                            <div class="custom-item-body text-center">
+                                <div class="btn-group" role="group" aria-label="...">
+                                    <button type="button" class="btn btn-primary btn-sm" [ngClass]="{'active': props.fontWeight }" (click)="setBold()">
+                                        <i class="fa fa-bold"></i>
+                                    </button>
+                                    <button type="button" class="btn btn-primary btn-sm" [ngClass]="{'active': props.fontStyle }" (click)="setFontStyle()">
+                                        <i class="fa fa-italic"></i>
+                                    </button>
+                                    <button type="button" class="btn btn-primary btn-sm" [ngClass]="{'active': hasTextDecoration('underline') }"
+                                        (click)="setTextDecoration('underline')">
+                                        <i class="fa fa-underline"></i>
+                                    </button>
+                                    <button type="button" class="btn btn-primary btn-sm" [ngClass]="{'active': hasTextDecoration('overline') }"
+                                        (click)="setTextDecoration('overline')">
+                                        <i class="fa fa-underline fa-flip-vertical"></i>
+                                    </button>
+                                    <button type="button" class="btn btn-primary btn-sm" [ngClass]="{'active': hasTextDecoration('line-through') }"
+                                        (click)="setTextDecoration('line-through')">
+                                        <i class="fa fa-strikethrough"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="custom-item" *ngIf="selected && textEditor">
+                            <div class="custom-item-title">Tamanho da Fonte</div>
+                            <div class="custom-item-body">
+                                <input type="range" [(ngModel)]="props.fontSize" (change)="setFontSize()" step="1" min="1" max="120">{{props.fontSize}}</div>
+                        </div>
+                        <div class="custom-item" *ngIf="selected && textEditor">
+                            <div class="custom-item-title">Altura da Linha</div>
+                            <div class="custom-item-body">
+                                <input type="range" [(ngModel)]="props.lineHeight" (change)="setLineHeight()" step="0.1" min="0" max="10">{{props.lineHeight}}</div>
+                        </div>
+                        <div class="custom-item" *ngIf="selected && textEditor">
+                            <div class="custom-item-title">Espaçamento entre Caracteres</div>
+                            <div class="custom-item-body">
+                                <input type="range" [(ngModel)]="props.charSpacing" (change)="setCharSpacing()" step="10" min="-200" max="800">{{props.charSpacing}}</div>
+                        </div>
                     </div>
                 </div>
-            </div>
+            </div>    
         </div>
     </div>
-    <div class="row">
+    <!--<div class="">
         <div class="col-xl-12">
             <br/>
             <div class="card">
@@ -292,7 +306,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div>-->
     <br>
     <br>
 </div>

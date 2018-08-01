@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import 'fabric';
+import { ValueTransformer } from '@angular/compiler/src/util';
 declare const fabric: any;
 
 @Component({
@@ -17,6 +18,7 @@ export class AppComponent {
     canvasImage: '',
     id: null,
     opacity: null,
+    filter: null,
     fill: null,
     fontSize: null,
     lineHeight: null,
@@ -70,6 +72,7 @@ export class AppComponent {
 
           this.getId();
           this.getOpacity();
+          
 
           switch (selectedObject.type) {
             case 'rect':
@@ -91,6 +94,7 @@ export class AppComponent {
               break;
             case 'image':
               console.log('image');
+              this.getFilter();
               break;
           }
         }
@@ -157,8 +161,8 @@ export class AppComponent {
         hasRotatingPoint: true,
         peloas: 12
       });
-      image.setWidth(150);
-      image.setHeight(150);
+      image.setWidth(128);
+      image.setHeight(128);
       this.extend(image, this.randomId());
       this.canvas.add(image);
       this.selectItemAfterAdded(image);
@@ -178,8 +182,8 @@ export class AppComponent {
           cornersize: 10,
           hasRotatingPoint: true
         });
-        image.setWidth(200);
-        image.setHeight(200);
+        image.setWidth(document.documentElement.clientWidth);
+        image.setHeight(document.documentElement.clientHeight);
         this.extend(image, this.randomId());
         this.canvas.add(image);
         this.selectItemAfterAdded(image);
@@ -374,6 +378,7 @@ export class AppComponent {
     this.setActiveStyle('opacity', parseInt(this.props.opacity) / 100, null);
   }
 
+
   getFill() {
     this.props.fill = this.getActiveStyle('fill', null);
   }
@@ -424,6 +429,25 @@ export class AppComponent {
     this.setActiveStyle('fontStyle', this.props.fontStyle ? 'italic' : '', null);
   }
 
+  getFilter(){
+    this.props.grayscale = this.getActiveStyle('filter', null);
+  }
+
+  setFilter(value){
+    let ifilter = this.props.filter;
+    if (ifilter.includes(value)){
+      ifilter = ifilter.replace(RegExp(value, "g"), "");
+    }else{
+      ifilter += `${value}`
+    }
+    this.props.filter = ifilter;
+    this.setActiveStyle('filter', this.props.filter, null);
+  }
+
+  hasFilter(value){
+    return this.props.filter.includes(value)
+  }
+
 
   getTextDecoration() {
     this.props.TextDecoration = this.getActiveStyle('textDecoration', null);
@@ -443,6 +467,7 @@ export class AppComponent {
   hasTextDecoration(value) {
     return this.props.TextDecoration.includes(value);
   }
+
 
 
   getTextAlign() {

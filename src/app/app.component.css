@@ -1,3 +1,7 @@
+  body{
+    background-color: #383838;
+  }
+
   #canvas {
     border: 2px dashed #cccccc;
   }
@@ -45,5 +49,9 @@
   .max-height{
     overflow: auto;
     max-height: 300px;
+  }
+
+  .input_upl_image{
+    font-size: 0.65rem;
   }
   
