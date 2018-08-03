@@ -121,10 +121,10 @@ export class AppComponent {
 
   //Block "Size"
 
-  changeSize(event: any) {
+  /*changeSize(event: any) {
     this.canvas.setWidth(this.size.width);
     this.canvas.setHeight(this.size.height);
-  }
+  }*/
 
   //Block "Add text"
 

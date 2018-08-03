@@ -4,10 +4,14 @@ import { FormsModule } from '@angular/forms';
 import { ColorPickerModule } from 'ngx-color-picker';
 
 import { AppComponent } from './app.component';
+import {NavbarComponent} from './navbar/navbar.component';
+import {TamanhoComponent} from './tamanho/tamanho.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    NavbarComponent,
+    TamanhoComponent
   ],
   imports: [
     BrowserModule,
