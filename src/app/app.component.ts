@@ -12,13 +12,12 @@ declare const fabric: any;
 
 export class AppComponent {
 
-  private canvas: any;
+  public canvas: any;
   private props: any = {
     canvasFill: '#ffffff',
     canvasImage: '',
     id: null,
     opacity: null,
-    filter: null,
     fill: null,
     fontSize: null,
     lineHeight: null,
@@ -33,8 +32,8 @@ export class AppComponent {
   private textString: string;
   private url: string = '';
   private size: any = {
-    width: 500,
-    height: 800
+    width: 540,
+    height: 540
   };
 
   private json: any;
@@ -48,11 +47,11 @@ export class AppComponent {
 
   ngOnInit() {
 
-    //setup front side canvas
+    //Criação do Canvas
     this.canvas = new fabric.Canvas('canvas', {
       hoverCursor: 'pointer',
       selection: true,
-      selectionBorderColor: 'blue'
+      selectionBorderColor: 'red'
     });
 
     this.canvas.on({
@@ -94,7 +93,6 @@ export class AppComponent {
               break;
             case 'image':
               console.log('image');
-              this.getFilter();
               break;
           }
         }
@@ -114,19 +112,20 @@ export class AppComponent {
     // console.log(canvasElement)
     // });
 
+    
+
   }
 
+  /*------------------------Box elementos------------------------*/
 
-  /*------------------------Block elements------------------------*/
+  //Box Tamanho
 
-  //Block "Size"
-
-  /*changeSize(event: any) {
+  changeSize(event: any) {
     this.canvas.setWidth(this.size.width);
     this.canvas.setHeight(this.size.height);
-  }*/
+  }
 
-  //Block "Add text"
+  //Box Adicionat Texto
 
   addText() {
     let textString = this.textString;
@@ -147,7 +146,7 @@ export class AppComponent {
     this.textString = '';
   }
 
-  //Block "Add images"
+  //Box Adicionar imagens
 
   getImgPolaroid(event: any) {
     let el = event.target;
@@ -169,7 +168,7 @@ export class AppComponent {
     });
   }
 
-  //Block "Upload Image"
+  //Box Upload Imagens
 
   addImageOnCanvas(url) {
     if (url) {
@@ -186,8 +185,14 @@ export class AppComponent {
         image.setHeight(document.documentElement.clientHeight);
         this.extend(image, this.randomId());
         this.canvas.add(image);
+        //URL.revokeObjectURL();
         this.selectItemAfterAdded(image);
+        //image.src = URL.createObjectURL(image)
+        console.log(url)
+        console.log(image)
       });
+
+      
     }
   }
 
@@ -205,7 +210,7 @@ export class AppComponent {
     this.url = '';
   };
 
-  //Block "Add figure"
+  //Box Adicionar Figuras
 
   addFigure(figure) {
     let add: any;
@@ -238,7 +243,7 @@ export class AppComponent {
     this.selectItemAfterAdded(add);
   }
 
-  /*Canvas*/
+  /*Canvas -- BG*/
 
   cleanSelect() {
     this.canvas.deactivateAllWithDispatch().renderAll();
@@ -280,7 +285,7 @@ export class AppComponent {
     return Math.floor(Math.random() * 999999) + 1;
   }
 
-  /*------------------------Global actions for element------------------------*/
+  /*------------------------Ações Globais para os elementos------------------------*/
 
   getActiveStyle(styleName, object) {
     object = object || this.canvas.getActiveObject();
@@ -429,26 +434,6 @@ export class AppComponent {
     this.setActiveStyle('fontStyle', this.props.fontStyle ? 'italic' : '', null);
   }
 
-  getFilter(){
-    this.props.grayscale = this.getActiveStyle('filter', null);
-  }
-
-  setFilter(value){
-    let ifilter = this.props.filter;
-    if (ifilter.includes(value)){
-      ifilter = ifilter.replace(RegExp(value, "g"), "");
-    }else{
-      ifilter += `${value}`
-    }
-    this.props.filter = ifilter;
-    this.setActiveStyle('filter', this.props.filter, null);
-  }
-
-  hasFilter(value){
-    return this.props.filter.includes(value)
-  }
-
-
   getTextDecoration() {
     this.props.TextDecoration = this.getActiveStyle('textDecoration', null);
   }
@@ -487,7 +472,7 @@ export class AppComponent {
     this.setActiveProp('fontFamily', this.props.fontFamily);
   }
 
-  /*System*/
+  /*Sistema*/
 
 
   removeSelected() {
@@ -543,14 +528,14 @@ export class AppComponent {
   }
 
   confirmClear() {
-    if (confirm('Are you sure?')) {
+    if (confirm('Você tem cereza?')) {
       this.canvas.clear();
     }
   }
 
   rasterize() {
     if (!fabric.Canvas.supports('toDataURL')) {
-      alert('This browser doesn\'t provide means to serialize canvas to an image');
+      alert('Este navegador não fornece meios para serializar a tela para uma imagem');
     }
     else {
       console.log(this.canvas.toDataURL('png'))
@@ -588,15 +573,15 @@ export class AppComponent {
     console.log('CANVAS');
     console.log(CANVAS);
 
-    // and load everything from the same json
+    // carregue tudo do mesmo json
     this.canvas.loadFromJSON(CANVAS, () => {
       console.log('CANVAS untar');
       console.log(CANVAS);
 
-      // making sure to render canvas at the end
+      // certificando-se de renderizar a tela no final
       this.canvas.renderAll();
 
-      // and checking if object's "name" is preserved
+      // verificar se o "nome" do objeto é preservado
       console.log('this.canvas.item(0).name');
       console.log(this.canvas);
     });

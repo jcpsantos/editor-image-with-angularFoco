@@ -1,0 +1,13 @@
+<div class="card-header">Adicionar texto</div>
+<div class="card-body">
+    <div class="input-group">
+        <input type="text" class="form-control" [(ngModel)]="textString">
+        <div class="input-group-append">
+            <span class="input-group-text">
+                <button id="add-text" data-toggle="tooltip" data-placement="bottom" title="Add text" class="btn btn-primary" (click)="addText()">
+                    <i class="fa fa-plus" aria-hidden="true"></i>
+                </button>
+            </span>
+        </div>
+    </div>
+</div>

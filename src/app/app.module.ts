@@ -6,12 +6,14 @@ import { ColorPickerModule } from 'ngx-color-picker';
 import { AppComponent } from './app.component';
 import {NavbarComponent} from './navbar/navbar.component';
 import {TamanhoComponent} from './tamanho/tamanho.component';
+import {TextoComponent} from './texto/texto.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
-    TamanhoComponent
+    TamanhoComponent,
+    TextoComponent
   ],
   imports: [
     BrowserModule,

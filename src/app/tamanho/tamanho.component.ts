@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import 'fabric';
 import { ValueTransformer } from '@angular/compiler/src/util';
+import {AppComponent} from '../app.component';
 declare const fabric: any;
 
 @Component({
@@ -12,8 +13,8 @@ export class TamanhoComponent {
     private canvas: any;
     
     private size: any = {
-        width: 500,
-        height: 800
+        width: 540,
+        height: 540
     };
     constructor(){}
 
