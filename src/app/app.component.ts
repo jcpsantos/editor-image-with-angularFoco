@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-
+import { saveAs } from 'file-saver/FileSaver';
 import 'fabric';
 import { ValueTransformer } from '@angular/compiler/src/util';
+
 declare const fabric: any;
 
 @Component({
@@ -185,7 +186,7 @@ export class AppComponent {
         image.setHeight(document.documentElement.clientHeight);
         this.extend(image, this.randomId());
         this.canvas.add(image);
-        //URL.revokeObjectURL();
+        //URL.revokeObjectURL(image);
         this.selectItemAfterAdded(image);
         //image.src = URL.createObjectURL(image)
         console.log(url)
@@ -493,6 +494,47 @@ export class AppComponent {
     }
   }
 
+  //Keyboard - Teclado - Setas e Delete
+  handleInput(event) {
+    console.log(event, event.keyCode, event.keyIdentifier);
+ } 
+  onkeypress = function(e) {
+    switch (e.keyCode) {
+      case 38:  /* Cima*/
+          if(this.canvas.getActiveObject()){
+            this.canvas.getActiveObject().top -= 5;
+            this.canvas.renderAll();
+          }
+        break;
+      case 40:  /* Baixo  */
+          if(this.canvas.getActiveObject()){
+            this.canvas.getActiveObject().top += 5;
+            this.canvas.renderAll(); 
+          }
+        break;
+      case 37:  /* Esquerda */
+          if(this.canvas.getActiveObject()){
+            this.canvas.getActiveObject().left -= 5; 
+            this.canvas.renderAll();
+          }
+        break;
+      case 39:  /* Direita  */
+          if(this.canvas.getActiveObject()){
+            this.canvas.getActiveObject().left += 5; 
+            this.canvas.renderAll();
+          }
+        break;
+      case 127:  /* Delete */
+          if(this.canvas.getActiveObject()){
+            this.canvas.getActiveObject().remove(); 
+          }else if (this.canvas.getActiveGroup()){
+            this.canvas.getActiveGroup().remove();
+          }
+        break;
+
+    }
+}   
+
   bringToFront() {
     let activeObject = this.canvas.getActiveObject(),
       activeGroup = this.canvas.getActiveGroup();
@@ -533,17 +575,47 @@ export class AppComponent {
     }
   }
 
+  base64ToBlob(dataURL) {
+    var mimeString = '';
+    var raw, uInt8Array, i, rawLength;
+    var rImageType = /data:(image\/.+);base64,/;
+
+    raw = dataURL.replace(rImageType, function(header, imageType){
+      mimeString = imageType;
+      return '';
+    })
+    raw = atob(raw);
+    rawLength = raw.length;
+    uInt8Array = new Uint8Array(rawLength)
+
+    for (i = 0; i < rawLength; i+=1){
+      uInt8Array[i] = raw.charCodeAt(i);
+    }
+
+    return new Blob([uInt8Array], {type: mimeString})
+    
+  }
+
   rasterize() {
+    var dataURL = this.canvas.toDataURL()
+    var img = this.canvas.toDataURL('png')
+    
     if (!fabric.Canvas.supports('toDataURL')) {
       alert('Este navegador não fornece meios para serializar a tela para uma imagem');
-    }
-    else {
-      console.log(this.canvas.toDataURL('png'))
+      console.log(img)
       //window.open(this.canvas.toDataURL('png'));
       var image = new Image();
-      image.src = this.canvas.toDataURL('png')
+      image.src = img
       var w = window.open("");
       w.document.write(image.outerHTML);
+    }
+    else {
+      var blob = this.base64ToBlob(dataURL);
+      var type = blob.type.split('/')[1];
+      if (img.split('.').pop()!== type){
+        img += '.'+type;
+      }
+      saveAs(blob, img);
     }
   }
 
