@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { saveAs } from 'file-saver/FileSaver';
 import 'fabric';
 import { ValueTransformer } from '@angular/compiler/src/util';
+import { $ } from 'protractor';
 
 declare const fabric: any;
 
@@ -36,6 +37,10 @@ export class AppComponent {
     width: 540,
     height: 540
   };
+  public sf: any = {
+    width:0,
+    height: 0
+  };
 
   private json: any;
   private globalEditor: boolean = false;
@@ -43,6 +48,8 @@ export class AppComponent {
   private imageEditor: boolean = false;
   private figureEditor: boolean = false;
   private selected: any;
+
+ 
 
   constructor() { }
 
@@ -72,7 +79,6 @@ export class AppComponent {
 
           this.getId();
           this.getOpacity();
-          
 
           switch (selectedObject.type) {
             case 'rect':
@@ -104,6 +110,7 @@ export class AppComponent {
       }
     });
 
+
     this.canvas.setWidth(this.size.width);
     this.canvas.setHeight(this.size.height);
 
@@ -113,12 +120,23 @@ export class AppComponent {
     // console.log(canvasElement)
     // });
 
+    // Deletar no teclado!
+    var canvas = this.canvas;
     
+    document.addEventListener('keydown', function(event) {
+      console.log(event.keyCode)
+      switch (event.keyCode){
+        case 46: //Deletar
+          if(canvas.getActiveObject()){
+            canvas.getActiveObject().remove();     
+          }
+      break;
+      }
+    })
 
   }
 
   /*------------------------Box elementos------------------------*/
-
   //Box Tamanho
 
   changeSize(event: any) {
@@ -126,6 +144,25 @@ export class AppComponent {
     this.canvas.setHeight(this.size.height);
   }
 
+  //Tamanho final 
+  sizeFinal(value){
+    alert(value)
+    switch(value){
+      case 'facebook':
+        this.sf.width = 1200
+        this.sf.height = 627
+      break;
+      case 'instagram':
+        this.sf.width = 1080
+        this.sf.height = 1080
+      break;
+      case 'capa-face':
+        this.sf.width = 820
+        this.sf.height = 312     
+    }
+  }
+
+  
   //Box Adicionat Texto
 
   addText() {
@@ -316,7 +353,6 @@ export class AppComponent {
     this.canvas.renderAll();
   }
 
-
   getActiveProp(name) {
     var object = this.canvas.getActiveObject();
     if (!object) return '';
@@ -383,7 +419,6 @@ export class AppComponent {
   setOpacity() {
     this.setActiveStyle('opacity', parseInt(this.props.opacity) / 100, null);
   }
-
 
   getFill() {
     this.props.fill = this.getActiveStyle('fill', null);
@@ -494,47 +529,6 @@ export class AppComponent {
     }
   }
 
-  //Keyboard - Teclado - Setas e Delete
-  handleInput(event) {
-    console.log(event, event.keyCode, event.keyIdentifier);
- } 
-  onkeypress = function(e) {
-    switch (e.keyCode) {
-      case 38:  /* Cima*/
-          if(this.canvas.getActiveObject()){
-            this.canvas.getActiveObject().top -= 5;
-            this.canvas.renderAll();
-          }
-        break;
-      case 40:  /* Baixo  */
-          if(this.canvas.getActiveObject()){
-            this.canvas.getActiveObject().top += 5;
-            this.canvas.renderAll(); 
-          }
-        break;
-      case 37:  /* Esquerda */
-          if(this.canvas.getActiveObject()){
-            this.canvas.getActiveObject().left -= 5; 
-            this.canvas.renderAll();
-          }
-        break;
-      case 39:  /* Direita  */
-          if(this.canvas.getActiveObject()){
-            this.canvas.getActiveObject().left += 5; 
-            this.canvas.renderAll();
-          }
-        break;
-      case 127:  /* Delete */
-          if(this.canvas.getActiveObject()){
-            this.canvas.getActiveObject().remove(); 
-          }else if (this.canvas.getActiveGroup()){
-            this.canvas.getActiveGroup().remove();
-          }
-        break;
-
-    }
-}   
-
   bringToFront() {
     let activeObject = this.canvas.getActiveObject(),
       activeGroup = this.canvas.getActiveGroup();
@@ -596,13 +590,50 @@ export class AppComponent {
     
   }
 
-  rasterize() {
+  rasterize(){
+    if (this.sf.width > 0){
+      this.downloadURI(this.getCanvasAsImage(this.canvas, 0, 0, this.sf.width, this.sf.height), 'canvas.png');
+     }else{
+       alert("Infelizmente não foi possível realizar o download do arquivo!")
+     }
+  }
+
+  getCanvasAsImage(ctx, x, y, width, height) {
+    var c = ctx.getContext("2d");
+    var imgData = c.getImageData(x, y, width, height);
+    
+    var tc = document.createElement('canvas');
+    tc.width = imgData.width; 
+    tc.height = imgData.height;
+    var tctx = tc.getContext('2d');
+    tctx.putImageData(imgData, 0, 0);
+    return tc.toDataURL('image/png');
+}
+
+downloadURI(uri, name) {
+  var link = document.createElement('a');
+  link.download = name;
+  link.href = uri;
+  link.click();
+}
+
+  /*rasterize() {
     var dataURL = this.canvas.toDataURL()
     var img = this.canvas.toDataURL('png')
+
+    //console.log(this.canvas.setWidth(this.size.width))
+    if (this.sf.width > 0){
+     // this.canvas.setWidth(this.sf.width)
+     // this.canvas.setHeight(this.sf.height)
+      this.canvas.toDataURL.width = this.sf.width
+      this.canvas.toDataURL.height = this.sf.height
+    }else{
+      //console.log("!OK!")
+    }
     
     if (!fabric.Canvas.supports('toDataURL')) {
       alert('Este navegador não fornece meios para serializar a tela para uma imagem');
-      console.log(img)
+      //console.log(img)
       //window.open(this.canvas.toDataURL('png'));
       var image = new Image();
       image.src = img
@@ -612,12 +643,21 @@ export class AppComponent {
     else {
       var blob = this.base64ToBlob(dataURL);
       var type = blob.type.split('/')[1];
+      img = img.split('/')[10];
+      this.canvas.toDataURL.width = this.sf.width
+      this.canvas.toDataURL.height = this.sf.height
       if (img.split('.').pop()!== type){
         img += '.'+type;
       }
-      saveAs(blob, img);
+      var image = new Image()
+      image = img
+      console.log(image)
+      console.log(this.canvas.toDataURL.height)
+      this.canvas.toDataURL.width = this.sf.width
+      this.canvas.toDataURL.height = this.sf.height
+      saveAs(blob,image);
     }
-  }
+  }*/
 
   rasterizeSVG() {
     console.log(this.canvas.toSVG())
