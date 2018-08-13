@@ -49,7 +49,6 @@ export class AppComponent {
   private figureEditor: boolean = false;
   private selected: any;
 
- 
 
   constructor() { }
 
@@ -59,7 +58,7 @@ export class AppComponent {
     this.canvas = new fabric.Canvas('canvas', {
       hoverCursor: 'pointer',
       selection: true,
-      selectionBorderColor: 'red'
+      selectionBorderColor: 'red',
     });
 
     this.canvas.on({
@@ -110,7 +109,6 @@ export class AppComponent {
       }
     });
 
-
     this.canvas.setWidth(this.size.width);
     this.canvas.setHeight(this.size.height);
 
@@ -144,6 +142,12 @@ export class AppComponent {
     this.canvas.setHeight(this.size.height);
   }
 
+  changeSizeFinal(sizeW, sizeH){
+    this.canvas.setWidth(sizeW)
+    this.canvas.setHeight(sizeH)
+    this.zoom()
+  }
+
   //Tamanho final 
   sizeFinal(value){
     alert(value)
@@ -160,8 +164,14 @@ export class AppComponent {
         this.sf.width = 820
         this.sf.height = 312     
     }
+
+    this.changeSizeFinal(this.sf.width, this.sf.height)
   }
 
+  zoom() {
+    this.canvas.setZoom(this.canvas.getZoom() * 0.5 );
+    this.canvas.zoomToPoint(new fabric.Point(this.canvas.width * 0.5, this.canvas.height * 0.5), this.canvas.getZoom() * 0.5);
+  }
   
   //Box Adicionat Texto
 
